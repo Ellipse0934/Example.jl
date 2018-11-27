@@ -1,18 +1,10 @@
 module Example
-export hello, domath
 
-"""
-    hello(who::String)
+import Base.rand
+export AbstractPoint, AbstractLine,AbstractPlane, Point, Line, Plane
+export area, point, distance, convexHull
 
-Return "Hello, `who`".
-"""
-hello(who::String) = "Hello, $who"
+include("types.jl")
+include("functions.jl")
 
-"""
-    domath(x::Number)
-
-Return `x + 5`.
-"""
-domath(x::Number) = x + 5
-
-end
+end # module
