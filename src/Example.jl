@@ -1,6 +1,6 @@
 module Example
 
-using Gadfly
+using Gadfly, Colors, DataFrames
 import Gadfly.plot
 
 import Base.rand
