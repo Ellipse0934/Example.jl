@@ -4,16 +4,16 @@
 #rand(rng::Random.AbstractRNG, ::Random.SamplerType{Point{T, N}}) where N where T = Point{T, N}(NTuple{N, T}(rand(rng, T, N)))
 distance(p1::Point{T, N}, p2::Point{T, N}) where N where T = sqrt(sum((p1.coordinates .- p2.coordinates).^2))
 
-#=function area(arr::Array{Point{T, N}})
-    length(arr) ≦ 2 && error("Area for two points cannot be computed!")
+function area(arr::Array{Point{T, 2}, 1}) where T
+    length(arr) <= 2 && error("Area for two points cannot be computed!")
     area = 0.0
     x = 2
     y = 3
     flag = false
-    while(x ≦ length(arr) && y ≦ length(arr))
+    while(x <= length(arr) && y <= length(arr))
         a = distance(arr[1], arr[x])
-        b = distance(arr[x], arr[z])
-        c = distance(arr[1], arr[z])
+        b = distance(arr[x], arr[y])
+        c = distance(arr[1], arr[y])
         s = (a + b + c)/2.0
         area += sqrt(s*(s - a)*(s - b)*(s - c))
         if flag == false
@@ -25,7 +25,7 @@ distance(p1::Point{T, N}, p2::Point{T, N}) where N where T = sqrt(sum((p1.coordi
         end
     end
     return area
-end=#
+end
 
 function convexHull(points::Array{Point{T,2},1}) where T
     if length(points) < 3
@@ -83,11 +83,11 @@ function distance(p::Point{T, N}, q::Plane{T, N}) where N where T
     y = distance(p, q.n)
     return sqrt(x^2 - y^2)
 end
-#=
-function boundingbox(a::Array{Point{T, N}}})
-    mn = Array{T}(undef, N)
+
+function boundingbox(a::Array{Point{T, N}, 1}) where N where T
+    mn = Array{T,1}(undef, N)
     mn .= typemax(T)
-    mx = Array{T}(undef, N)
+    mx = Array{T,1}(undef, N)
     mx .= typemin(T)
     for i in 1:N, j in 1:length(a)
         mn[i] = min(mn[i], a[j].coordinates[i])
@@ -95,5 +95,3 @@ function boundingbox(a::Array{Point{T, N}}})
     end
     return (Point{T, N}(mn), Point{T, N}(mx))
 end
-
-=#

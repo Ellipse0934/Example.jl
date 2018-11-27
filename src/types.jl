@@ -39,9 +39,3 @@ struct Plane{T, N} <: AbstractPlane{T, N}
     p::Point{T, N}
     n::Vector{T}
 end
-
-"""
-    Polygon{T, N}
-
-An array of points.
-"""
